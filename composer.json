@@ -1,0 +1,21 @@
+{
+    "authors": [
+        {
+            "name": "Miriam Lopez Martinez",
+            "email": "miriam.mlm@outlook.de"
+        }
+    ],
+
+    "require" : {
+        "php" : ">=7.4"
+    },
+
+    "require-dev": {
+        "symfony/var-dumper": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "OverlapBlocks\\": "src/"
+        }
+    }
+}
