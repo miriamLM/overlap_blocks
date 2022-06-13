@@ -6,8 +6,19 @@ namespace OverlapBlocks\Overlap\Infrastructure;
 
 final class InputBlocksCommandController
 {
+    public function __construct()
+    {
+    }
+
     public function explodeInputBlocks(string $inputBlocks): void
     {
-        echo "$inputBlocks";
+        //echo "$inputBlocks";
+        $firstBlock = "";
+    //todo esto al aplication service
+        for ($i = 0; $i < strlen($inputBlocks); $i++) {
+
+            $firstBlock = $firstBlock . $inputBlocks[$i];
+        }
+        echo "$firstBlock";
     }
 }
