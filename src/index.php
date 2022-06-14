@@ -10,10 +10,6 @@ use OverlapBlocks\Shared\Infrastructure\CreateBlockBoardController;
 
 require_once '../vendor/autoload.php';
 
-$createBlockBoardService = new CreateBlockBoardService();
-$createBlockBoardController = new CreateBlockBoardController($createBlockBoardService);
-$createBlockBoardController(5,6);
-
 if (isset($argv)) {
     try {
         $blockInput = count($argv) === 1 ? "" : $argv[1];
