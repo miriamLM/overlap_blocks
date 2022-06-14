@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OverlapBlocks\Overlap\ApplicationService\InputBlockService;
 use OverlapBlocks\Overlap\ApplicationService\OverlapBlocksService;
+use OverlapBlocks\Overlap\Infrastructure\ExceptionToHumanMessage;
 use OverlapBlocks\Overlap\Infrastructure\InputBlocksCommandController;
 
 
@@ -18,6 +19,9 @@ if (isset($argv)) {
         $inputBlockCommandController = new InputBlocksCommandController($inputBlockService, $overlapBlocksService);
         $inputBlockCommandController->explodeInputBlocks($blockInput);
     } catch (RuntimeException $exception) {
+        $exceptionToHumanMessage = new ExceptionToHumanMessage();
+        echo $exceptionToHumanMessage->map(get_class($exception)) . '. Error code: ' . $exception->getCode(
+            ) . '.' . "\n";
     }
 
     return;
