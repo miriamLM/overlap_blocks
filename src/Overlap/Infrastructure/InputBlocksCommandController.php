@@ -6,20 +6,30 @@ namespace OverlapBlocks\Overlap\Infrastructure;
 
 use OverlapBlocks\Overlap\ApplicationService\ExplodeInputBlocksRequest;
 use OverlapBlocks\Overlap\ApplicationService\InputBlockService;
+use OverlapBlocks\Overlap\ApplicationService\InputBlocksResponse;
+use OverlapBlocks\Overlap\ApplicationService\OverlapBlocksService;
 
 final class InputBlocksCommandController
 {
     private InputBlockService $inputBlockService;
+    private OverlapBlocksService $overlapBlocksService;
 
-    public function __construct(InputBlockService $inputBlockService)
+    public function __construct(InputBlockService $inputBlockService, OverlapBlocksService $overlapBlocksService)
     {
         $this->inputBlockService = $inputBlockService;
+        $this->overlapBlocksService = $overlapBlocksService;
     }
 
     public function explodeInputBlocks(string $inputBlocks): void
     {
         $explodeInputBlocksRequest = new ExplodeInputBlocksRequest($inputBlocks);
-        $this->inputBlockService->explodeInputBlocks($explodeInputBlocksRequest);
+        $inputBlocksResponse = $this->inputBlockService->explodeInputBlocks($explodeInputBlocksRequest);
+        $this->overlapBlocks($inputBlocksResponse);
 
+    }
+
+    public function overlapBlocks(InputBlocksResponse $inputBlocksResponse)
+    {
+        $this->overlapBlocksService->__invoke($inputBlocksResponse);
     }
 }
