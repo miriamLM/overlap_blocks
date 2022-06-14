@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OverlapBlocks\Shared\Infrastructure;
 
 use OverlapBlocks\Shared\ApplicationService\CreateBlockBoardService;
+use OverlapBlocks\Shared\ApplicationService\SizeBlockBoardRequest;
 
 final class CreateBlockBoardController
 {
@@ -17,6 +18,7 @@ final class CreateBlockBoardController
 
     public function __invoke(int $width, int $length)
     {
+        $sizeBlockBoardRequest = new SizeBlockBoardRequest($width, $length);
 
     }
 }
