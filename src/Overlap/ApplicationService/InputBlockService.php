@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace OverlapBlocks\Overlap\ApplicationService;
 
+
+use OverlapBlocks\Overlap\Domain\Block;
+
 final class InputBlockService
 {
 
-    public function explodeInputBlocks(ExplodeInputBlocksRequest $explodeInputBlocksRequest)
+    public function explodeInputBlocks(ExplodeInputBlocksRequest $explodeInputBlocksRequest): InputBlocksResponse
     {
         $firstBlock = "";
         $secondBlock = "";
@@ -25,7 +28,6 @@ final class InputBlockService
             if ($this->isChar(
                     $explodeInputBlocksRequest->value()[$i]
                 ) && true === $firstCharOrientation && false === $secondCharOrientation) {
-
                 $secondCharOrientation = true;
 
                 $secondBlock = $secondBlock . $explodeInputBlocksRequest->value()[$i - 1];
@@ -38,6 +40,12 @@ final class InputBlockService
                 $firstCharOrientation = true;
             }
         }
+
+        $firstBlockCreated = $this->createBlock($firstBlock);
+
+        $secondBlockCreated = $this->createBlock($secondBlock);
+
+        return new InputBlocksResponse($firstBlockCreated, $secondBlockCreated);
     }
 
     private function isChar(string $inputChar): bool
@@ -46,5 +54,16 @@ final class InputBlockService
             return true;
         }
         return false;
+    }
+
+    private function createBlock(string $block): Block
+    {
+        $id = $block[0];
+        $orientation = $block[1];
+        $positionX = $block[2];
+        $positionY = $block[3];
+        $length = $block[4];
+
+        return new Block(intval($id), $orientation, intval($positionX), intval($positionY), intval($length));
     }
 }
