@@ -6,6 +6,7 @@ namespace OverlapBlocks\Overlap\ApplicationService;
 
 
 use OverlapBlocks\Overlap\Domain\Block;
+use OverlapBlocks\Overlap\Domain\Exceptions\InvalidInputs;
 
 final class InputBlockService
 {
@@ -39,6 +40,11 @@ final class InputBlockService
             if ($this->isChar($explodeInputBlocksRequest->value()[$i]) && false === $firstCharOrientation) {
                 $firstCharOrientation = true;
             }
+        }
+        if (false === $firstCharOrientation || false === $secondCharOrientation || 4 > strlen(
+                $firstBlock
+            ) || 4 > strlen($secondBlock)) {
+            throw new InvalidInputs();
         }
 
         $firstBlockCreated = $this->createBlock($firstBlock);
