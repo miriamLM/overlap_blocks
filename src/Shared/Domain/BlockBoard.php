@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OverlapBlocks\Shared\Domain;
+
 final class BlockBoard
 {
     private int $width;

@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace OverlapBlocks\Shared\Infrastructure;
+
+use OverlapBlocks\Shared\ApplicationService\CreateBlockBoardService;
+
 final class CreateBlockBoardController
 {
     private CreateBlockBoardService $createBlockBoardService;
