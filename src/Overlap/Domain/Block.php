@@ -2,21 +2,24 @@
 
 declare(strict_types=1);
 
+namespace OverlapBlocks\Overlap\Domain;
+
+
 final class Block
 {
     private int $id;
     private string $orientation;
     private int $positionX;
     private int $positionY;
-    private int $lenght;
+    private int $length;
 
-    public function __construct(int $id, string $orientation, int $positionX, int $positionY, int $lenght)
+    public function __construct(int $id, string $orientation, int $positionX, int $positionY, int $length)
     {
         $this->id = $id;
         $this->orientation = $orientation;
         $this->positionX = $positionX;
         $this->positionY = $positionY;
-        $this->lenght = $lenght;
+        $this->length = $length;
     }
 
     public function idValue(): int
@@ -39,9 +42,9 @@ final class Block
         return $this->positionY;
     }
 
-    public function lenghtValue(): int
+    public function lengthValue(): int
     {
-        return $this->lenght;
+        return $this->length;
     }
 
     public function checkCorrectOrientation()
