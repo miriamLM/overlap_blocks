@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OverlapBlocks\Overlap\Domain;
 
 
+use OverlapBlocks\Overlap\Domain\Exceptions\InvalidInputs;
+
 final class Block
 {
     private int $id;
@@ -20,6 +22,8 @@ final class Block
         $this->positionX = $positionX;
         $this->positionY = $positionY;
         $this->length = $length;
+
+        $this->checkCorrectOrientation();
     }
 
     public function idValue(): int
@@ -49,7 +53,10 @@ final class Block
 
     public function checkCorrectOrientation()
     {
-
+        if ('v' != $this->orientationValue() || 'h' != $this->orientationValue())
+        {
+            throw new InvalidInputs();
+        }
     }
 
 }
