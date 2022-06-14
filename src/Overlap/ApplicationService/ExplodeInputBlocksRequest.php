@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OverlapBlocks\Overlap\ApplicationService;
 
-
 final class ExplodeInputBlocksRequest
 {
     private string $inputBlocks;
