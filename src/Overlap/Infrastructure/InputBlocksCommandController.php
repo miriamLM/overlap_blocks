@@ -20,16 +20,15 @@ final class InputBlocksCommandController
         $this->overlapBlocksService = $overlapBlocksService;
     }
 
-    public function explodeInputBlocks(string $inputBlocks): void
+    public function explodeInputBlocks(string $inputBlocks): bool
     {
         $explodeInputBlocksRequest = new ExplodeInputBlocksRequest($inputBlocks);
         $inputBlocksResponse = $this->inputBlockService->explodeInputBlocks($explodeInputBlocksRequest);
-        $this->overlapBlocks($inputBlocksResponse);
-
+        return $this->overlapBlocks($inputBlocksResponse);
     }
 
-    public function overlapBlocks(InputBlocksResponse $inputBlocksResponse)
+    public function overlapBlocks(InputBlocksResponse $inputBlocksResponse): bool
     {
-        $this->overlapBlocksService->__invoke($inputBlocksResponse);
+        return $this->overlapBlocksService->__invoke($inputBlocksResponse);
     }
 }
