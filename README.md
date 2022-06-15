@@ -9,11 +9,7 @@
 ## CLI usage
 `cd src`
 
-`php index.php input`
+`php index.php`
 
-- Examples:
-    - `php index.php 0h2351v311`
-    - `php index.php 0h2311h231`
-    
 ## Requirements
 - php >= 7.4
