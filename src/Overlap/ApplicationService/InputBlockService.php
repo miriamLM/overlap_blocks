@@ -19,6 +19,7 @@ final class InputBlockService
         $firstCharOrientation = false;
         $secondCharOrientation = false;
 
+        //explode the inputBlocks to get the two blocks
         for ($i = 0; $i < strlen($explodeInputBlocksRequest->value()); $i++) {
             if (false === $secondCharOrientation) {
                 $firstBlock = $firstBlock . $explodeInputBlocksRequest->value()[$i];
