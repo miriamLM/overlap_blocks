@@ -14,3 +14,6 @@
 - Examples:
     - `php index.php 0h2351v311`
     - `php index.php 0h2311h231`
+    
+## Requirements
+- php >= 7.4
