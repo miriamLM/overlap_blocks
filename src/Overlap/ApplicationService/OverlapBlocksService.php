@@ -12,6 +12,7 @@ final class OverlapBlocksService
         $firstBlock = $inputBlocksResponse->firstBlockValue();
         $secondBlock = $inputBlocksResponse->secondBlockValue();
 
+        //check if they overlap or not, taking into account the orientation of each block
         for ($i = 0; $i < $firstBlock->lengthValue(); $i++) {
             for ($j = 0; $j < $secondBlock->lengthValue(); $j++) {
                 if ('h' === $firstBlock->orientationValue() && 'h' === $secondBlock->orientationValue()) {
