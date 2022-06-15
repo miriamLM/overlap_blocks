@@ -17,7 +17,9 @@ if (isset($argv)) {
         $inputBlockService = new InputBlockService();
         $overlapBlocksService = new OverlapBlocksService();
         $inputBlockCommandController = new InputBlocksCommandController($inputBlockService, $overlapBlocksService);
-        $inputBlockCommandController->explodeInputBlocks($blockInput);
+        $overlap = $inputBlockCommandController->explodeInputBlocks($blockInput);
+        echo $overlap ? 'true' : 'false';
+        echo "\n";
     } catch (RuntimeException $exception) {
         $exceptionToHumanMessage = new ExceptionToHumanMessage();
         echo $exceptionToHumanMessage->map(get_class($exception)) . '. Error code: ' . $exception->getCode(
