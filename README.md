@@ -1,5 +1,8 @@
 # OVERLAP BLOCKS
 
+## More information 
+Read about the [explanation](EXPLICACION.md) of this project.
+
 ## How to start
 
 1. If you don't have it already, [install Composer](https://getcomposer.org/download/).
