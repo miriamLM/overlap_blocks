@@ -53,7 +53,7 @@ final class Block
 
     public function checkCorrectOrientation()
     {
-        if ('v' != $this->orientationValue() || 'h' != $this->orientationValue())
+        if ('v' != $this->orientationValue() && 'h' != $this->orientationValue())
         {
             throw new InvalidInputs();
         }
