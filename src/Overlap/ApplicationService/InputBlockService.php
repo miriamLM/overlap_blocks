@@ -13,46 +13,26 @@ final class InputBlockService
 
     public function explodeInputBlocks(ExplodeInputBlocksRequest $explodeInputBlocksRequest): InputBlocksResponse
     {
-        $firstBlock = "";
-        $secondBlock = "";
-
-        $firstCharOrientation = false;
-        $secondCharOrientation = false;
-
-        for ($i = 0; $i < strlen($explodeInputBlocksRequest->value()); $i++) {
-            if (false === $secondCharOrientation) {
-                $firstBlock = $firstBlock . $explodeInputBlocksRequest->value()[$i];
-            } else {
-                $secondBlock = $secondBlock . $explodeInputBlocksRequest->value()[$i];
-            }
-
-            if ($this->isChar(
-                    $explodeInputBlocksRequest->value()[$i]
-                ) && true === $firstCharOrientation && false === $secondCharOrientation) {
-                $secondCharOrientation = true;
-
-                $secondBlock = $secondBlock . $explodeInputBlocksRequest->value()[$i - 1];
-                $secondBlock = $secondBlock . $explodeInputBlocksRequest->value()[$i];
-
-                $firstBlock = substr($firstBlock, 0, -2);
-            }
-
-            if ($this->isChar($explodeInputBlocksRequest->value()[$i]) && false === $firstCharOrientation) {
-                $firstCharOrientation = true;
+        $inputBlocks = explode(" ", $explodeInputBlocksRequest->value());
+        $characters = 0;
+        for ($i = 0; $i < count($inputBlocks); $i++) {
+            if ($this->isChar($inputBlocks[$i])) {
+                $characters++;
             }
         }
-
-        if (false === $firstCharOrientation || false === $secondCharOrientation || 5 != strlen(
-                $firstBlock
-            ) || 5 != strlen($secondBlock)) {
+        if (2 != $characters || 10 != count($inputBlocks)){
             throw new InvalidInputs();
         }
 
-        $firstBlockCreated = $this->createBlock($firstBlock);
+        $blocks = array_chunk($inputBlocks, 5);
 
-        $secondBlockCreated = $this->createBlock($secondBlock);
+
+        $firstBlockCreated = $this->createBlock($blocks[0]);
+
+        $secondBlockCreated = $this->createBlock($blocks[1]);
 
         return new InputBlocksResponse($firstBlockCreated, $secondBlockCreated);
+
     }
 
     private function isChar(string $inputChar): bool
@@ -63,7 +43,7 @@ final class InputBlockService
         return false;
     }
 
-    private function createBlock(string $block): Block
+    private function createBlock(array $block): Block
     {
         $id = $block[0];
         $orientation = $block[1];
