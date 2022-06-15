@@ -41,9 +41,9 @@ final class InputBlockService
                 $firstCharOrientation = true;
             }
         }
-        if (false === $firstCharOrientation || false === $secondCharOrientation || 4 > strlen(
+        if (false === $firstCharOrientation || false === $secondCharOrientation || 5 > strlen(
                 $firstBlock
-            ) || 4 > strlen($secondBlock)) {
+            ) || 5 > strlen($secondBlock)) {
             throw new InvalidInputs();
         }
 
