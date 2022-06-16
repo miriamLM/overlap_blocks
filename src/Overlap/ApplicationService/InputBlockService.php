@@ -18,15 +18,19 @@ final class InputBlockService
 
         $firstCharOrientation = false;
         $secondCharOrientation = false;
+        $charOrientationCount = 0;
 
         //explode the inputBlocks to get the two blocks
         for ($i = 0; $i < strlen($explodeInputBlocksRequest->value()); $i++) {
+            //while the second character is not found, it save the value in the firstBlock,
+            // otherwhise save the values in the secondBlock
             if (false === $secondCharOrientation) {
                 $firstBlock = $firstBlock . $explodeInputBlocksRequest->value()[$i];
             } else {
                 $secondBlock = $secondBlock . $explodeInputBlocksRequest->value()[$i];
             }
-
+            //if it is found the second character, subtract a value of the of the firstBlock (referring to the id)
+            // and save the id and the character of the orientation in the secondBlock
             if ($this->isChar(
                     $explodeInputBlocksRequest->value()[$i]
                 ) && true === $firstCharOrientation && false === $secondCharOrientation) {
@@ -40,6 +44,10 @@ final class InputBlockService
 
             if ($this->isChar($explodeInputBlocksRequest->value()[$i]) && false === $firstCharOrientation) {
                 $firstCharOrientation = true;
+            }
+            //control that only can be 2 char so it count the characters in the input
+            if ($this->isChar($explodeInputBlocksRequest->value()[$i])) {
+                $charOrientationCount++;
             }
         }
 
