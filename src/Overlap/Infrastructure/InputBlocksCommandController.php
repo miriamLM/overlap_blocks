@@ -27,7 +27,7 @@ final class InputBlocksCommandController
         return $this->overlapBlocks($inputBlocksResponse);
     }
 
-    public function overlapBlocks(InputBlocksResponse $inputBlocksResponse): bool
+    private function overlapBlocks(InputBlocksResponse $inputBlocksResponse): bool
     {
         return $this->overlapBlocksService->__invoke($inputBlocksResponse);
     }
